@@ -13,14 +13,15 @@
         <h1 class="is-size-1">Perfect Ambient Generator</h1>
     </header>
     <div class="container">
-        <input class="input" type="text" placeholder="Search for a Book" />
+        <input class="input" type="text" placeholder="Search for a Book" id="searchInput"/>
         <div class="select">
             <select>
-            <option>Author</option>
-            <option>Title</option>
+            <option id="author">Author</option>
+            <option id="title">Title</option>
             </select>
         </div>
-        <button class="button is-info">Search</button>
+        <button class="button is-info" id="searchButton" type="button">Submit</button>
     </div>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
