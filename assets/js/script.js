@@ -1,24 +1,23 @@
-const libraryAPI = "https://openlibrary.org/search.json?title="
+const libraryAPI = "https://openlibrary.org/search.json?title=";
 const searchButton = document.getElementById('searchButton');
+const searchInput = document.getElementById('searchInput');
 
 
+function getApi() {
 
-function getApi () {
-
-    fetch(libraryAPI)
-    .then(function (response){
-        return response.json();
-    })
-    .then(function (data)) {
-        console.log(data)
-    }
+    const booktitle = searchInput.value;
+console.log (booktitle);
+console.log(libraryAPI+booktitle);
+    fetch(libraryAPI+booktitle)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+        
+    console.log("I work")
 }
 
+searchButton.addEventListener("click", getApi);
 
-
-
-
-
-
-
-searchButton.addEventListener('click', getApi)
