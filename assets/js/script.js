@@ -19,7 +19,6 @@ function getApi() {
     }
         });
 
-    console.log("I work")
 }
 
 searchButton.addEventListener("click", getApi);
