@@ -30,8 +30,7 @@ function getPlaylist(access_token, search) {
 }
 
 getAccessToken(clientId, clientSecret);
-=======
-const libraryAPI = "https://openlibrary.org/search.json?title=";
+// Book Search
 const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
 
