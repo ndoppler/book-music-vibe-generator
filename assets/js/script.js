@@ -33,32 +33,59 @@ function getPlaylist(access_token, search) {
       spotifyResultsHeader = $('<h2>')
         .text = 'Spotify Results'
 
-      spotifyDivider = $('<div>')
-        .addClass()
+// Generation of Playlist One Elements for Playlist One Card
+      playlistOneCard = $('<div>')
+        .addClass("card")
 
-      playlistSection = $('<ul>')
-        .addClass('image is-128x128')
+      playlistOneCardContent = $('<div>')
+        .addClass("card-content has-background-primary-dark")
 
-      playlistOneHeader = $('<li>')
-        .text(`${data.playlists.items[0].name}`)
+      playlistOneMedia = $('<div>')
+        .addClass("media")
+
+      playlistOneMediaLeft = $('<div>')
+        .addClass("media-left")
+
+      playlistOneFigure = $('<div>')
+        .addClass("image is-48x48")
 
       playlistOneImage = $('<img>')
         .addClass('image is-rounded')
         .attr('src', `${data.playlists.items[0].images[0].url}`)
-      
-      console.log(data.playlists.items[0].images[0].url)
 
-      playlistTwoHeader = $('<li>')
-        .text(`${data.playlists.items[1].name}`)
-      
-      
+      playlistOneMediaContent = $('<div>')
+        .addClass("media-content")
 
+      playlistOneHeader = $('<p>')
+        .addClass("title is-4")
+        .text(`${data.playlists.items[0].name}`)
+
+      playlistOneSubHeader = $('<a>')
+        .addClass("subtitle is-6")
+        .attr("href", data.playlists.items[0].external_urls.spotify)
+        .text('Check It Out')
+        .click()
+
+
+      // Creation of Spotify Results Header --Still needs Bulma Formatting
       spotifyResultsEl.append(spotifyResultsHeader)
-      spotifyResultsEl.append(playlistSection)
-      playlistSection.append(playlistOneImage)
-      playlistSection.append(playlistOneHeader)
+      // Creation of Spotify Playlist 1 Result Card
+      spotifyResultsEl.append(playlistOneCard)
+      playlistOneCard.append(playlistOneCardContent)
+      playlistOneCardContent.append(playlistOneMedia)
+      playlistOneMedia.append(playlistOneMediaLeft)
+      playlistOneMedia.append(playlistOneMediaContent)
+      playlistOneMediaLeft.append(playlistOneFigure)
+      playlistOneFigure.append(playlistOneImage)
+      playlistOneMediaContent.append(playlistOneHeader)
+      playlistOneMediaContent.append(playlistOneSubHeader)
 
-      playlistSection.append(playlistTwoHeader)
+      console.log(data.playlists.items[0].external_urls.spotify)
+
+      // playlistSection.append(playlistOneImage)
+      // playlistSection.append(playlistOneHeader)
+
+      // playlistSection.append(playlistTwoHeader)
 
     });
 }
