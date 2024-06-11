@@ -1,3 +1,5 @@
+  // JavaScript JQuery Elements
+  spotifyResultsEl = $('#spotifyResults')
 
 // Spotify Credentials
 const clientId = '9fa2e110194042238f5becb0c3425fc1';
@@ -24,7 +26,20 @@ function getPlaylist(access_token, search) {
     }
   })
   .then(response => response.json())
-  .then(data => console.log("data", data));
+  .then(function(data) {
+    
+    spotifyResultsHeader = $('<h2>')
+      .text = 'Spotify Results'
+
+    spotifyDivider = $('<div>')
+      .addClass()
+
+    playlistOne = $('<li>')
+      .text = `${data.playlists.items[0].name}`
+
+      spotifyResultsEl.append(spotifyResultsHeader)
+      spotifyResultsEl.append(playlistOne)
+  });
 }
 
 
