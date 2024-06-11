@@ -71,7 +71,7 @@ const libraryAPI = "https://openlibrary.org/search.json?title=";
 const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
 
-
+/*
 function getApi() {
 
   const booktitle = searchInput.value;
@@ -92,5 +92,51 @@ function getApi() {
 }
 
 searchButton.addEventListener("click", getApi);
+*/
 
+async function searchByAuthor(authorName) {
+    const searchUrl = `https://openlibrary.org/search/authors.json?q=${encodeURIComponent(authorName)}`;
+
+    try {
+        console.log(`Fetching data from: ${searchUrl}`) // log the url being fetched
+        const response = await fetch(searchUrl);
+        const data = await response.json();
+
+        console.log(`Number of authors found: ${data.numFound}`); // logs the number of authors
+        if (data.numFound > 0) {
+            const authors = data.docs.slice(0, 5).map(author => ({
+                key: author.key,
+                name: author.name,
+                top_work: author.top_work,
+            }));
+            console.log('Authors data:', authors); // logs the authors data
+            return authors;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        console.error('Error fetching author data:', error);
+        return [];
+    }
+}
+    searchButton.addEventListener('click', async () => {
+        const authorName = searchInput.value;
+        const authors = await searchByAuthor(authorName);
+    })
+// example only
+// searchByAuthor('F. Scott Fitzgerald')
+//     .then(authors => {
+//         if (authors.length > 0) {
+//             const authorsArray = [];
+
+//             authors.forEach(author => {
+//                 authorsArray.push(author);
+//             });
+
+//             console.log(authorsArray);
+//         } else {
+//             console.error("No authors found");
+//         }
+//     })
+//     .catch(error => console.error(error));
 

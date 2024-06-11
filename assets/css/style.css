@@ -1,3 +1,5 @@
-.input {
-    max-width: 50%;
+.field.is-grouped {
+    display: flex;
+    gap: .75rem;
+    justify-content: center;
 }

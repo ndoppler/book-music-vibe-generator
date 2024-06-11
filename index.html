@@ -10,17 +10,26 @@
 </head>
 <body>
     <header class="container mgb-small">
-        <h1 class="is-size-1">Perfect Ambient Generator</h1>
+        <h1 class="title is-size-1 has-text-centered">Perfect Ambient Generator</h1>
     </header>
     <div class="container">
-        <input class="input" type="text" placeholder="Search for a Book" id="searchInput"/>
-        <div class="select">
-            <select>
-            <option id="author">Author</option>
-            <option id="title">Title</option>
-            </select>
+        <div class="field is-grouped">
+            <div class="control">
+                <input class="input" type="text" placeholder="Search for a Book" id="searchInput"/>
+            </div>
+
+            <div class="control">
+                <div class="select">
+                    <select id="">
+                    <option id="author">Author</option>
+                    <option id="title">Title</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control">
+                <button class="button is-info" id="searchButton" type="button">Submit</button>
+            </div>
         </div>
-        <button class="button is-info" id="searchButton" type="button">Submit</button>
     </div>
 
     <div id="spotifyResults"></div>
