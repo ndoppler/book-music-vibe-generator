@@ -62,14 +62,28 @@ function getApi() {
       console.log(data.docs);
       const books = data.docs;
       const bookEl = document.getElementById('bookResults');
+   
+
+      // const subject = data.subject;
+      // console.log(JSON.stringify(subject));
+
+
       bookEl.innerHTML = " ";
+
+      
       for (let i = 0; i < books.length; i++) {
+       console.log(Array.isArray(books[i].subject));
+       console.log(books[i]);
+       if (!books[i].subject) {
+        continue 
+       }
         const book = {
           title: books[i].title,
           author: books[i].author_name,
           subject: books[i].subject,
         }
 
+        localStorage.setItem("book", JSON.stringify(book));
         const bookCard = document.createElement('div');
         const titleEL = document.createElement('h2');
         const authorEl = document.createElement('p');
@@ -82,9 +96,27 @@ function getApi() {
           bookCard.append(titleEL);
           bookCard.append(authorEl);
         bookEl.append(bookCard);
-        
+
 bookCard.addEventListener('click', function (){
-  document.location.href = "https://google.com"
+  // document.location.href = "https://google.com"
+
+  const book = JSON.parse(localStorage.getItem("book"));
+  console.log(book);
+  const subjectEL = document.getElementById('subjectResults');
+  const subjectCard = document.createElement('div');
+  const subject = document.createElement('h2');
+ 
+
+  subjectEL.textContent = book.subject;
+ console.log(book.subject);
+
+  subjectCard.setAttribute('class', 'card');
+
+   subjectCard.append(subject);
+subjectEL.append(subjectCard);
+
+
+
 });
 
       }
