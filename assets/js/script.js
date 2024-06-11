@@ -15,8 +15,8 @@ function getAccessToken(clientId, clientSecret) {
     },
     body: 'grant_type=client_credentials'
   })
-  .then(response => response.json())
-  .then(data => getPlaylist(data.access_token, "Gloria Gaynor"));
+    .then(response => response.json())
+    .then(data => getPlaylist(data.access_token, "Gloria Gaynor"));
 }
 
 function getPlaylist(access_token, search) {
@@ -25,9 +25,22 @@ function getPlaylist(access_token, search) {
       'Authorization': `Bearer ${access_token}`
     }
   })
-  .then(response => response.json())
-  .then(data => console.log("data", data));
+    .then(response => response.json())
+    .then(data => console.log("data", data));
 }
+
+// function renderBook () {
+//   const bookEl = document.getElementById('bookResults');
+// const bookCard= document.createElement('div');
+// const titleEL = document.createElement('h2');
+
+// titleEL.textContent = ;
+
+// bookCard.append(titleEL);
+// bookEL.append(bookCard);
+// }
+
+
 
 getAccessToken(clientId, clientSecret);
 // Book Search
@@ -36,22 +49,50 @@ const searchInput = document.getElementById('searchInput');
 
 
 function getApi() {
+  // const query = document.getElementById('option');
+  // console.log(query);
+  const booktitle = searchInput.value;
+  const requestUrl = libraryAPI + booktitle + "&limit=5";
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    //Retrieves subject from each book
+    .then(function (data) {
+      console.log(data.docs);
+      const books = data.docs;
+      const bookEl = document.getElementById('bookResults');
+      bookEl.innerHTML = " ";
+      for (let i = 0; i < books.length; i++) {
+        const book = {
+          title: books[i].title,
+          author: books[i].author_name,
+          subject: books[i].subject,
+        }
 
-    const booktitle = searchInput.value;
-    const requestUrl = libraryAPI + booktitle;
-    fetch(requestUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data.docs);
-          const books = data.docs;
-          for (let i = 0; i <books.length; i++) {
-       console.log (books[i].subject);
-    }
-        });
+        const bookCard = document.createElement('div');
+        const titleEL = document.createElement('h2');
+        const authorEl = document.createElement('p');
 
-}
+        titleEL.textContent = book.title;
+        authorEl.textContent = book.author;
+
+        bookCard.setAttribute('class', 'card');
+
+          bookCard.append(titleEL);
+          bookCard.append(authorEl);
+        bookEl.append(bookCard);
+        
+bookCard.addEventListener('click', function (){
+  document.location.href = "https://google.com"
+});
+
+      }
+
+    });
+};
+
+
 
 searchButton.addEventListener("click", getApi);
 
