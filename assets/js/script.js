@@ -1,5 +1,7 @@
+const libraryAPI = "https://openlibrary.org/search.json?title=";
+const searchButton = document.getElementById('searchButton');
+const searchInput = document.getElementById('searchInput');
 
-const libraryAPI = "https://openlibrary.org/search.json?title="
 
 // Spotify Credentials
 const clientId = '9fa2e110194042238f5becb0c3425fc1';
@@ -43,6 +45,7 @@ function getPlaylist(access_token, search) {
 
 
 getAccessToken(clientId, clientSecret);
+
 // Book Search
 const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
