@@ -35,10 +35,10 @@ function getPlaylist(access_token, search) {
 
 // Generation of Playlist One Elements for Playlist One Card
       playlistOneCard = $('<div>')
-        .addClass("card")
+        .addClass("card m-5 column is-half")
 
       playlistOneCardContent = $('<div>')
-        .addClass("card-content has-background-primary-dark")
+        .addClass("card-content has-background-primary-dark ")
 
       playlistOneMedia = $('<div>')
         .addClass("media")
@@ -61,10 +61,20 @@ function getPlaylist(access_token, search) {
         .text(`${data.playlists.items[0].name}`)
 
       playlistOneSubHeader = $('<a>')
-        .addClass("subtitle is-6")
-        .attr("href", data.playlists.items[0].external_urls.spotify)
+        .addClass("subtitle is-6 m-2")
+        .attr({
+          "href": data.playlists.items[0].external_urls.spotify,
+          "target": "_blank"
+        })
         .text('Check It Out')
-        .click()
+
+        playlistOneTrackModal = $('<a>')
+        .addClass("subtitle is-6 m-2")
+        .attr({
+          "href": data.playlists.items[0].external_urls.spotify,
+          "target": "_blank"
+        })
+        .text('Take a Look at the Tracks')
 
 
       // Creation of Spotify Results Header --Still needs Bulma Formatting
@@ -79,8 +89,7 @@ function getPlaylist(access_token, search) {
       playlistOneFigure.append(playlistOneImage)
       playlistOneMediaContent.append(playlistOneHeader)
       playlistOneMediaContent.append(playlistOneSubHeader)
-
-      console.log(data.playlists.items[0].external_urls.spotify)
+      playlistOneMediaContent.append(playlistOneTrackModal)
 
       // playlistSection.append(playlistOneImage)
       // playlistSection.append(playlistOneHeader)
