@@ -263,3 +263,74 @@ function getApi() {
 };
 
 searchButton.addEventListener("click", getApi);
+
+
+async function searchByAuthor(authorName) {
+    const searchUrl = `https://openlibrary.org/search/authors.json?q=${encodeURIComponent(authorName)}`;
+
+    try {
+        const response = await fetch(searchUrl);
+        const data = await response.json();
+
+        if (data.numFound > 0) {
+            const authors = data.docs.slice(0, 5).map(author => ({
+                key: author.key,
+                name: author.name,
+                top_work: author.top_work,
+            }));
+            return authors;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        return [];
+    }
+}
+
+async function fetchAuthorWorks(authorKey, limit = 5) {
+    const worksUrl = `https://openlibrary.org/authors/${authorKey}/works.json?limit=${limit}`;
+
+    try {
+        const response = await fetch(worksUrl);
+        const data = await response.json();
+
+        if (data.entries && data.entries.length > 0) {
+            const works = data.entries.map(work => ({
+                title: work.title,
+                key: work.key,
+            }));
+            return works;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        return [];
+    }
+}
+
+document.getElementById('searchButton').addEventListener('click', async () => {
+    const searchInput = document.getElementById('searchInput').value;
+    const searchType = document.getElementById('searchType').value;
+    const authorResultsContainer = document.getElementById('authorSearchResults');
+
+    if (searchType.toLowerCase() === 'author') {
+        const authors = await searchByAuthor(searchInput);
+        if (authors.length > 0) {
+            const authorKey = authors[0].key;
+            const works = await fetchAuthorWorks(authorKey, 5);
+
+            if (works.length > 0) {
+                authorResultsContainer.textContent = "Top Works"
+                works.forEach(work => {
+                    const workElement = document.createElement('div');
+                    workElement.textContent = `${work.title}`;
+                    authorResultsContainer.appendChild(workElement);
+                });
+            } else {
+                authorResultsContainer.textContent = "No works found";
+            }
+        } else {
+            authorResultsContainer.textContent = "No authors found";
+        }
+    }
+});
