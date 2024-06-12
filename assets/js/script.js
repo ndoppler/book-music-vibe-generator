@@ -245,16 +245,21 @@ function searchBook() {
                     const book = JSON.parse(localStorage.getItem("book"));
                     for (let i = 0; i < 5; i++) {
 
-                        const subjectCard = document.createElement('div');
+                        const subjectCard = document.createElement('button');
                         const subject = document.createElement('h2');
 
                         subject.textContent = book.subject[i];
                         console.log(book.subject);
 
-                        subjectCard.setAttribute('class', 'card');
+                        subjectCard.setAttribute('class', 'card')
+                        subjectCard.setAttribute('id', subject.textContent);
 
                         subjectCard.append(subject);
                         subjectEL.append(subjectCard);
+
+                        subjectCard.addEventListener('click', function() {
+                            console.log(this.id)
+                        })
                     }
 
                 });
