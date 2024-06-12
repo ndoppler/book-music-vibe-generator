@@ -33,11 +33,12 @@ function getPlaylist(access_token, search) {
             console.log(data)
 
             spotifyResultsHeader = $('<h2>')
-                .text = 'Spotify Results'
+                .text('Spotify Results')
+                .addClass('is-size-1 has-text-centered')
 
             // Generation of Playlist One Elements for Playlist One Card
             playlistOneCard = $('<div>')
-                .addClass("card column")
+                .addClass("card column has-background-primary")
             playlistTwoCard = $('<div>')
                 .addClass("card column")
             playlistThreeCard = $('<div>')
