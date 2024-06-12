@@ -1,3 +1,17 @@
 .input {
     max-width: 50%;
 }
+
+
+.card {
+    background-color: #a1cfdd;
+    border: 4px solid #4c4e69;
+    border-radius: 6px;
+    width: 18%;
+    height: auto;
+    display: inline-block;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 10px;
+    padding: 10px;
+}
