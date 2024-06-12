@@ -38,60 +38,60 @@ getAccessToken(clientId, clientSecret);
 
     .then(function (data) {
 
-      console.log(data)
+  console.log(data)
 
-      spotifyResultsHeader = $('<h2>')
-        .text = 'Spotify Results'
+  spotifyResultsHeader = $('<h2>')
+    .text = 'Spotify Results'
 
-// Generation of Playlist One Elements for Playlist One Card
-      playlistOneCard = $('<div>')
-        .addClass("card m-5 column is-one-quarter")
+  // Generation of Playlist One Elements for Playlist One Card
+  playlistOneCard = $('<div>')
+    .addClass("card m-5 column is-one-quarter")
 
-      playlistOneCardContent = $('<div>')
-        .addClass("card-content has-background-primary-dark ")
+  playlistOneCardContent = $('<div>')
+    .addClass("card-content has-background-primary-dark ")
 
-      playlistOneMedia = $('<div>')
-        .addClass("media")
+  playlistOneMedia = $('<div>')
+    .addClass("media")
 
-      playlistOneMediaLeft = $('<div>')
-        .addClass("media-left")
+  playlistOneMediaLeft = $('<div>')
+    .addClass("media-left")
 
-      playlistOneFigure = $('<div>')
-        .addClass("image is-48x48")
+  playlistOneFigure = $('<div>')
+    .addClass("image is-48x48")
 
-      playlistOneImage = $('<img>')
-        .addClass('image is-rounded')
-        .attr('src', `${data.playlists.items[0].images[0].url}`)
+  playlistOneImage = $('<img>')
+    .addClass('image is-rounded')
+    .attr('src', `${data.playlists.items[0].images[0].url}`)
 
-      playlistOneMediaContent = $('<div>')
-        .addClass("media-content")
+  playlistOneMediaContent = $('<div>')
+    .addClass("media-content")
 
-      playlistOneHeader = $('<p>')
-        .addClass("title is-4")
-        .text(`${data.playlists.items[0].name}`)
+  playlistOneHeader = $('<p>')
+    .addClass("title is-4")
+    .text(`${data.playlists.items[0].name}`)
 
-      playlistOneSubHeader = $('<a>')
-        .addClass("subtitle is-6 m-2")
-        .attr({
-          "href": data.playlists.items[0].external_urls.spotify,
-          "target": "_blank"
-        })
-        .text('View Playlist')
+  playlistOneSubHeader = $('<a>')
+    .addClass("subtitle is-6 m-2")
+    .attr({
+      "href": data.playlists.items[0].external_urls.spotify,
+      "target": "_blank"
+    })
+    .text('View Playlist')
 
-      // Creation of Spotify Results Header --Still needs Bulma Formatting
-      spotifyResultsEl.append(spotifyResultsHeader)
-      // Creation of Spotify Playlist 1 Result Card
-      spotifyResultsEl.append(playlistOneCard)
-      playlistOneCard.append(playlistOneCardContent)
-      playlistOneCardContent.append(playlistOneMedia)
-      playlistOneMedia.append(playlistOneMediaLeft)
-      playlistOneMedia.append(playlistOneMediaContent)
-      playlistOneMediaLeft.append(playlistOneFigure)
-      playlistOneFigure.append(playlistOneImage)
-      playlistOneMediaContent.append(playlistOneHeader)
-      playlistOneMediaContent.append(playlistOneSubHeader)
-      playlistOneMediaContent.append(playlistOneTrackModal)
-    });
+  // Creation of Spotify Results Header --Still needs Bulma Formatting
+  spotifyResultsEl.append(spotifyResultsHeader)
+  // Creation of Spotify Playlist 1 Result Card
+  spotifyResultsEl.append(playlistOneCard)
+  playlistOneCard.append(playlistOneCardContent)
+  playlistOneCardContent.append(playlistOneMedia)
+  playlistOneMedia.append(playlistOneMediaLeft)
+  playlistOneMedia.append(playlistOneMediaContent)
+  playlistOneMediaLeft.append(playlistOneFigure)
+  playlistOneFigure.append(playlistOneImage)
+  playlistOneMediaContent.append(playlistOneHeader)
+  playlistOneMediaContent.append(playlistOneSubHeader)
+  playlistOneMediaContent.append(playlistOneTrackModal)
+});
 }
 
 // Library Search API
@@ -114,16 +114,16 @@ function getApi() {
       console.log(data.docs);
       const books = data.docs;
       const bookEl = document.getElementById('bookResults');
-   
+
       bookEl.innerHTML = " ";
 
-      
+
       for (let i = 0; i < books.length; i++) {
-       console.log(Array.isArray(books[i].subject));
-       console.log(books[i]);
-       if (!books[i].subject) {
-        continue 
-       }
+        console.log(Array.isArray(books[i].subject));
+        console.log(books[i]);
+        if (!books[i].subject) {
+          continue
+        }
         const book = {
           title: books[i].title,
           author: books[i].author_name,
@@ -137,49 +137,32 @@ function getApi() {
         titleEL.textContent = book.title;
         authorEl.textContent = book.author;
         bookCard.setAttribute('class', 'card');
-          bookCard.append(titleEL);
-          bookCard.append(authorEl);
+        bookCard.append(titleEL);
+        bookCard.append(authorEl);
         bookEl.append(bookCard);
-bookCard.addEventListener('click', function (){
+        bookCard.addEventListener('click', function () {
 
-  const book = JSON.parse(localStorage.getItem("book"));
-  console.log(book);
-  const subjectEL = document.getElementById('subjectResults');
-  const subjectCard = document.createElement('div');
-  const subject = document.createElement('h2');
- 
-
-  subjectEL.textContent = book.subject;
- console.log(book.subject);
-
-  subjectCard.setAttribute('class', 'card');
-
-   subjectCard.append(subject);
-subjectEL.append(subjectCard);
+          const book = JSON.parse(localStorage.getItem("book"));
+          console.log(book);
+          const subjectEL = document.getElementById('subjectResults');
+          const subjectCard = document.createElement('div');
+          const subject = document.createElement('h2');
 
 
+          subjectEL.textContent = book.subject;
+          console.log(book.subject);
 
-});
+          subjectCard.setAttribute('class', 'card');
+
+          subjectCard.append(subject);
+          subjectEL.append(subjectCard);
+
+
+
+        });
       }
     });
 };
-
-  const booktitle = searchInput.value;
-  const requestUrl = libraryAPI + booktitle;
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data.docs);
-      const books = data.docs;
-      for (let i = 0; i < books.length; i++) {
-        console.log(books[i].subject);
-      }
-    });
-  console.log("I work")
-}
-
 
 searchButton.addEventListener("click", getApi);
 
