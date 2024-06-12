@@ -214,7 +214,6 @@ function searchBook(booktitle) {
             const books = data.docs;
             const bookEl = document.getElementById('bookResults');
             const subjectEL = document.getElementById('subjectResults');
-
             bookEl.innerHTML = " ";
 
             for (let i = 0; i < books.length; i++) {
@@ -320,7 +319,7 @@ function openModal(works) {
 
     works.forEach(work => {
         const optionElement = document.createElement('option');
-        optionElement.value = work.key;
+        optionElement.value = work.title;
         optionElement.textContent = work.title;
         selectElement.appendChild(optionElement);
     });
@@ -371,12 +370,15 @@ searchButton.addEventListener("click", function() {
     }
 });
 
+// Still in works to connect to Leena's API
+document.getElementById('searchThemesButton').onclick = function() {
+    const selectedWork = document.querySelector('#modalContent select').value;
+    console.log('Selected work title:', selectedWork);
+    searchBook(selectedWork);
+    closeModal();
+};
+
 function clearResults() {
     const authorResultsContainer = document.getElementById('authorSearchResults');
     authorResultsContainer.innerHTML = '';
-}
-
-// Still in works to connect to Leena's API
-searchThemesButton.onclick = function() {
-    console.log('yay',searchThemesButton);
 }
