@@ -2,12 +2,8 @@
 spotifyResultsEl = $('#spotifyResults')
 topFourResultsEl = $('#topFourResults')
 
-// Spotify Credentials
-const clientId = '9fa2e110194042238f5becb0c3425fc1';
-const clientSecret = '97238e1767714ed2adafb1a197947f4e';
-
 // Spotify Authorization - Client Credentials
-function getAccessToken(clientId, clientSecret) {
+function getAccessToken(clientId, clientSecret, input) {
     return fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
@@ -17,11 +13,11 @@ function getAccessToken(clientId, clientSecret) {
         body: 'grant_type=client_credentials'
     })
         .then(response => response.json())
-        .then(data => getPlaylist(data.access_token, "Gloria Gaynor"));
+        .then(data => getPlaylist(data.access_token, input));
 }
 
-function getPlaylist(access_token, search) {
-    return fetch(`https://api.spotify.com/v1/search?q=${search}&type=playlist`, {
+function getPlaylist(access_token, input) {
+    return fetch(`https://api.spotify.com/v1/search?q=${input}&type=playlist`, {
         headers: {
             'Authorization': `Bearer ${access_token}`
         }
@@ -195,7 +191,7 @@ function getPlaylist(access_token, search) {
 }
 
 // Library Search API
-getAccessToken(clientId, clientSecret);
+// getAccessToken(clientId, clientSecret);
 
 const libraryAPI = "https://openlibrary.org/search.json?title=";
 const searchButton = document.getElementById('searchButton');
@@ -249,15 +245,22 @@ function searchBook(booktitle) {
                         console.log(book.subject);
 
                         subjectCard.setAttribute('class', 'card')
-                        subjectCard.setAttribute('id', subject.textContent);
+                        subject.setAttribute('id', subject.textContent);
 
                         subjectCard.append(subject);
                         subjectEL.append(subjectCard);
-
-                        subjectCard.addEventListener('click', function() {
-                            console.log(this.id)
-                        })
                     }
+
+                    subject.addEventListener('click', function () {
+
+                        // Spotify Credentials
+                        const clientId = '9fa2e110194042238f5becb0c3425fc1';
+                        const clientSecret = '97238e1767714ed2adafb1a197947f4e';
+
+                        const input = this.id
+
+                        getAccessToken(clientId, clientSecret)
+                    })
 
                 });
             }
