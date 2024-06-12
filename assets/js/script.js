@@ -196,12 +196,13 @@ function getPlaylist(access_token, search) {
 
 // Library Search API
 getAccessToken(clientId, clientSecret);
+
 const libraryAPI = "https://openlibrary.org/search.json?title=";
 const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
 
 // book search
-function getApi() {
+function searchBook() {
     // const query = document.getElementById('option');
     // console.log(query);
     const booktitle = searchInput.value;
@@ -215,13 +216,12 @@ function getApi() {
             console.log(data.docs);
             const books = data.docs;
             const bookEl = document.getElementById('bookResults');
+            const subjectEL = document.getElementById('subjectResults');
 
             bookEl.innerHTML = " ";
 
-
             for (let i = 0; i < books.length; i++) {
-                console.log(Array.isArray(books[i].subject));
-                console.log(books[i]);
+            
                 if (!books[i].subject) {
                     continue
                 }
@@ -244,26 +244,29 @@ function getApi() {
                 bookCard.addEventListener('click', function () {
 
                     const book = JSON.parse(localStorage.getItem("book"));
-                    console.log(book);
-                    const subjectEL = document.getElementById('subjectResults');
-                    const subjectCard = document.createElement('div');
-                    const subject = document.createElement('h2');
 
+                    for (let i = 0; i <5; i++) {
 
-                    subjectEL.textContent = book.subject;
-                    console.log(book.subject);
-
-                    subjectCard.setAttribute('class', 'card');
-
-                    subjectCard.append(subject);
-                    subjectEL.append(subjectCard);
+                        const subjectCard = document.createElement('div');
+                        const subject = document.createElement('h2');
+    
+                        subject.textContent = book.subject[i];
+                        console.log(book.subject);
+    
+                        subjectCard.setAttribute('class', 'card');
+    
+                        subjectCard.append(subject);
+                        subjectEL.append(subjectCard);
+                    }
+    
+    
 
                 });
             }
         });
 };
 
-searchButton.addEventListener("click", getApi);
+searchButton.addEventListener("click", searchBook);
 
 
 async function searchByAuthor(authorName) {
@@ -335,3 +338,4 @@ document.getElementById('searchButton').addEventListener('click', async () => {
         }
     }
 });
+
