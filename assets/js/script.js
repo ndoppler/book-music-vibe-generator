@@ -32,17 +32,6 @@ function getPlaylist(access_token, search) {
     .then(data => console.log("data", data));
 }
 
-// function renderBook () {
-//   const bookEl = document.getElementById('bookResults');
-// const bookCard= document.createElement('div');
-// const titleEL = document.createElement('h2');
-
-// titleEL.textContent = ;
-
-// bookCard.append(titleEL);
-// bookEL.append(bookCard);
-// }
-
 getAccessToken(clientId, clientSecret);
 
 // Book Search
