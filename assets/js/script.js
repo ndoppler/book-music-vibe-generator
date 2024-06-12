@@ -28,8 +28,25 @@ function getPlaylist(access_token, search) {
     }
   })
     .then(response => response.json())
+
     .then(data => console.log("data", data));
-    .then(response => response.json())
+}
+
+// function renderBook () {
+//   const bookEl = document.getElementById('bookResults');
+// const bookCard= document.createElement('div');
+// const titleEL = document.createElement('h2');
+
+// titleEL.textContent = ;
+
+// bookCard.append(titleEL);
+// bookEL.append(bookCard);
+// }
+
+getAccessToken(clientId, clientSecret);
+
+// Book Search
+
     .then(function (data) {
 
       console.log(data)
@@ -88,26 +105,11 @@ function getPlaylist(access_token, search) {
     });
 }
 
-// function renderBook () {
-//   const bookEl = document.getElementById('bookResults');
-// const bookCard= document.createElement('div');
-// const titleEL = document.createElement('h2');
-
-// titleEL.textContent = ;
-
-// bookCard.append(titleEL);
-// bookEL.append(bookCard);
-// }
-
-
-
+// Library Search API
 getAccessToken(clientId, clientSecret);
-// Book Search
-
 const libraryAPI = "https://openlibrary.org/search.json?title=";
 const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
-
 
 function getApi() {
   // const query = document.getElementById('option');
@@ -124,11 +126,6 @@ function getApi() {
       const books = data.docs;
       const bookEl = document.getElementById('bookResults');
    
-
-      // const subject = data.subject;
-      // console.log(JSON.stringify(subject));
-
-
       bookEl.innerHTML = " ";
 
       
@@ -148,18 +145,13 @@ function getApi() {
         const bookCard = document.createElement('div');
         const titleEL = document.createElement('h2');
         const authorEl = document.createElement('p');
-
         titleEL.textContent = book.title;
         authorEl.textContent = book.author;
-
         bookCard.setAttribute('class', 'card');
-
           bookCard.append(titleEL);
           bookCard.append(authorEl);
         bookEl.append(bookCard);
-
 bookCard.addEventListener('click', function (){
-  // document.location.href = "https://google.com"
 
   const book = JSON.parse(localStorage.getItem("book"));
   console.log(book);
@@ -179,12 +171,25 @@ subjectEL.append(subjectCard);
 
 
 });
-
       }
-
     });
 };
 
+  const booktitle = searchInput.value;
+  const requestUrl = libraryAPI + booktitle;
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data.docs);
+      const books = data.docs;
+      for (let i = 0; i < books.length; i++) {
+        console.log(books[i].subject);
+      }
+    });
+  console.log("I work")
+}
 
 
 searchButton.addEventListener("click", getApi);
