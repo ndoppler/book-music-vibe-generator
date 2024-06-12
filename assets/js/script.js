@@ -221,7 +221,7 @@ function searchBook() {
             bookEl.innerHTML = " ";
 
             for (let i = 0; i < books.length; i++) {
-            
+
                 if (!books[i].subject) {
                     continue
                 }
@@ -242,24 +242,20 @@ function searchBook() {
                 bookCard.append(authorEl);
                 bookEl.append(bookCard);
                 bookCard.addEventListener('click', function () {
-
                     const book = JSON.parse(localStorage.getItem("book"));
-
-                    for (let i = 0; i <5; i++) {
+                    for (let i = 0; i < 5; i++) {
 
                         const subjectCard = document.createElement('div');
                         const subject = document.createElement('h2');
-    
+
                         subject.textContent = book.subject[i];
                         console.log(book.subject);
-    
+
                         subjectCard.setAttribute('class', 'card');
-    
+
                         subjectCard.append(subject);
                         subjectEL.append(subjectCard);
                     }
-    
-    
 
                 });
             }
@@ -268,11 +264,11 @@ function searchBook() {
 
 searchButton.addEventListener("click", searchBook);
 
-
 async function searchByAuthor(authorName) {
     const searchUrl = `https://openlibrary.org/search/authors.json?q=${encodeURIComponent(authorName)}`;
 
     try {
+
         const response = await fetch(searchUrl);
         const data = await response.json();
 
