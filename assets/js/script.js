@@ -198,10 +198,7 @@ const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
 
 // book search
-function searchBook() {
-    // const query = document.getElementById('option');
-    // console.log(query);
-    const booktitle = searchInput.value;
+function searchBook(booktitle) {
     const requestUrl = libraryAPI + booktitle + "&limit=5";
     fetch(requestUrl)
         .then(function (response) {
@@ -213,7 +210,6 @@ function searchBook() {
             const books = data.docs;
             const bookEl = document.getElementById('bookResults');
             const subjectEL = document.getElementById('subjectResults');
-
             bookEl.innerHTML = " ";
 
             for (let i = 0; i < books.length; i++) {
@@ -237,6 +233,7 @@ function searchBook() {
                 bookCard.append(titleEL);
                 bookCard.append(authorEl);
                 bookEl.append(bookCard);
+
                 bookCard.addEventListener('click', function () {
                     const book = JSON.parse(localStorage.getItem("book"));
                     for (let i = 0; i < 5; i++) {
@@ -270,9 +267,7 @@ function searchBook() {
         });
 };
 
-searchButton.addEventListener("click", searchBook);
-
-async function searchByAuthor(authorName) {
+async function getAuthor(authorName) {
     const searchUrl = `https://openlibrary.org/search/authors.json?q=${encodeURIComponent(authorName)}`;
 
     try {
@@ -316,30 +311,77 @@ async function fetchAuthorWorks(authorKey, limit = 5) {
     }
 }
 
-document.getElementById('searchButton').addEventListener('click', async () => {
+function openModal(works) {
+    const modal = document.getElementById('worksModal');
+    const modalContent = document.getElementById('modalContent');
+    modalContent.innerHTML = '';
+    const selectWrapper = document.createElement('div');
+    selectWrapper.className = 'select is-fullwidth';
+    const selectElement = document.createElement('select');
+    selectElement.className = 'is-fullwidth';
+
+    works.forEach(work => {
+        const optionElement = document.createElement('option');
+        optionElement.value = work.title;
+        optionElement.textContent = work.title;
+        selectElement.appendChild(optionElement);
+    });
+
+    selectWrapper.appendChild(selectElement);
+    modalContent.appendChild(selectWrapper);
+
+    modal.classList.add('is-active');
+}
+
+function closeModal() {
+    const modal = document.getElementById('worksModal');
+    modal.classList.remove('is-active');
+}
+
+document.getElementById('closeModal').addEventListener('click', closeModal);
+document.getElementById('closeModalFooter').addEventListener('click', closeModal);
+
+async function searchAuthor() {
     const searchInput = document.getElementById('searchInput').value;
+    const authors = await getAuthor(searchInput);
+
+    if (authors.length > 0) {
+        const authorKey = authors[0].key;
+        const works = await fetchAuthorWorks(authorKey, 5);
+
+        if (works.length > 0) {
+            openModal(works);
+        } else {
+            openModal([{ title: 'No works found', key: '' }]);
+        }
+    } else {
+        openModal([{ title: 'No authors found', key: '' }]);
+    }
+};
+
+// SearchType 'author' or 'title' if statement's
+searchButton.addEventListener("click", function() {
     const searchType = document.getElementById('searchType').value;
-    const authorResultsContainer = document.getElementById('authorSearchResults');
+    const searchInputValue = document.getElementById('searchInput').value;
+    clearResults();
 
     if (searchType.toLowerCase() === 'author') {
-        const authors = await searchByAuthor(searchInput);
-        if (authors.length > 0) {
-            const authorKey = authors[0].key;
-            const works = await fetchAuthorWorks(authorKey, 5);
-
-            if (works.length > 0) {
-                authorResultsContainer.textContent = "Top Works"
-                works.forEach(work => {
-                    const workElement = document.createElement('div');
-                    workElement.textContent = `${work.title}`;
-                    authorResultsContainer.appendChild(workElement);
-                });
-            } else {
-                authorResultsContainer.textContent = "No works found";
-            }
-        } else {
-            authorResultsContainer.textContent = "No authors found";
-        }
+        searchAuthor();
+    }
+    if (searchType.toLowerCase() === 'title') {
+        searchBook(searchInputValue);
     }
 });
 
+// Still in works to connect to Leena's API
+document.getElementById('searchThemesButton').onclick = function() {
+    const selectedWork = document.querySelector('#modalContent select').value;
+    console.log('Selected work title:', selectedWork);
+    searchBook(selectedWork);
+    closeModal();
+};
+
+function clearResults() {
+    const authorResultsContainer = document.getElementById('authorSearchResults');
+    authorResultsContainer.innerHTML = '';
+}
