@@ -197,6 +197,18 @@ const libraryAPI = "https://openlibrary.org/search.json?title=";
 const searchButton = document.getElementById('searchButton');
 const searchInput = document.getElementById('searchInput');
 
+function fetchBookCover(isbn) {
+    const coverUrl = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
+    const bookCoverEl = document.getElementById('bookCoverResults');
+
+    const imgEl = document.createElement('img');
+    imgEl.src = coverUrl;
+    imgEl.alt = 'Book Cover';
+
+    bookCoverEl.innerHTML = '';
+    bookCoverEl.appendChild(imgEl);
+}
+
 // book search
 function searchBook(booktitle) {
     const requestUrl = libraryAPI + booktitle + "&limit=5";
@@ -204,9 +216,8 @@ function searchBook(booktitle) {
         .then(function (response) {
             return response.json();
         })
-        //Retrieves subject from each book
         .then(function (data) {
-            console.log(data.docs);
+            // console.log(data.docs);
             const books = data.docs;
             const bookEl = document.getElementById('bookResults');
             const subjectEL = document.getElementById('subjectResults');
@@ -221,6 +232,7 @@ function searchBook(booktitle) {
                     title: books[i].title,
                     author: books[i].author_name,
                     subject: books[i].subject,
+                    isbn: books[i].isbn ? books[i].isbn[0] : null
                 }
 
                 localStorage.setItem("book", JSON.stringify(book));
@@ -233,6 +245,10 @@ function searchBook(booktitle) {
                 bookCard.append(titleEL);
                 bookCard.append(authorEl);
                 bookEl.append(bookCard);
+
+                if (book.isbn) {
+                    fetchBookCover(book.isbn);
+                }
 
                 bookCard.addEventListener('click', function () {
                     const book = JSON.parse(localStorage.getItem("book"));
