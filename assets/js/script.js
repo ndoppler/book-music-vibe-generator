@@ -80,16 +80,16 @@ function getPlaylist(access_token, input) {
 
             playlistOneImage = $('<img>')
                 .addClass('image is-rounded')
-                .attr('src', `${data.playlists.items[0].images[0].url}`)
+                .attr('src', `${data.playlists?.items[0]?.images[0]?.url}`)
             playlistTwoImage = $('<img>')
                 .addClass('image is-rounded')
-                .attr('src', `${data.playlists.items[1].images[0].url}`)
+                .attr('src', `${data.playlists?.items[1]?.images[0]?.url}`)
             playlistThreeImage = $('<img>')
                 .addClass('image is-rounded')
-                .attr('src', `${data.playlists.items[2].images[0].url}`)
+                .attr('src', `${data.playlists?.items[2]?.images[0]?.url}`)
             playlistFourImage = $('<img>')
                 .addClass('image is-rounded')
-                .attr('src', `${data.playlists.items[3].images[0].url}`)
+                .attr('src', `${data.playlists?.items[3]?.images[0]?.url}`)
 
             playlistOneMediaContent = $('<div>')
                 .addClass("media-content")
@@ -102,42 +102,42 @@ function getPlaylist(access_token, input) {
 
             playlistOneHeader = $('<p>')
                 .addClass("title is-4")
-                .text(`${data.playlists.items[0].name}`)
+                .text(`${data.playlists?.items[0]?.name}`)
             playlistTwoHeader = $('<p>')
                 .addClass("title is-4")
-                .text(`${data.playlists.items[1].name}`)
+                .text(`${data.playlists?.items[1]?.name}`)
             playlistThreeHeader = $('<p>')
                 .addClass("title is-4")
-                .text(`${data.playlists.items[2].name}`)
+                .text(`${data.playlists?.items[2]?.name}`)
             playlistFourHeader = $('<p>')
                 .addClass("title is-4")
-                .text(`${data.playlists.items[3].name}`)
+                .text(`${data.playlists?.items[3]?.name}`)
 
             playlistOneSubHeader = $('<a>')
                 .addClass("subtitle is-6 m-2")
                 .attr({
-                    "href": data.playlists.items[0].external_urls.spotify,
+                    "href": data.playlists?.items[0]?.external_urls?.spotify,
                     "target": "_blank"
                 })
                 .text('View Playlist')
             playlistTwoSubHeader = $('<a>')
                 .addClass("subtitle is-6 m-2")
                 .attr({
-                    "href": data.playlists.items[1].external_urls.spotify,
+                    "href": data.playlists?.items[1]?.external_urls?.spotify,
                     "target": "_blank"
                 })
                 .text('View Playlist')
             playlistThreeSubHeader = $('<a>')
                 .addClass("subtitle is-6 m-2")
                 .attr({
-                    "href": data.playlists.items[2].external_urls.spotify,
+                    "href": data.playlists?.items[2]?.external_urls?.spotify,
                     "target": "_blank"
                 })
                 .text('View Playlist')
             playlistFourSubHeader = $('<a>')
                 .addClass("subtitle is-6 m-2")
                 .attr({
-                    "href": data.playlists.items[3].external_urls.spotify,
+                    "href": data.playlists?.items[3]?.external_urls?.spotify,
                     "target": "_blank"
                 })
                 .text('View Playlist')
@@ -242,25 +242,25 @@ function searchBook(booktitle) {
                         const subject = document.createElement('h2');
 
                         subject.textContent = book.subject[i];
-                        console.log(book.subject);
 
                         subjectCard.setAttribute('class', 'card')
-                        subject.setAttribute('id', subject.textContent);
+                        subject.setAttribute('id', book.subject[i]);
 
                         subjectCard.append(subject);
                         subjectEL.append(subjectCard);
                     }
 
-                    subjectEL.addEventListener('click', function () {
-
+                    subjectEL.addEventListener('click', function (event) {
+                        if (event.target.matches('h2')) {
                         // Spotify Credentials
                         const clientId = '9fa2e110194042238f5becb0c3425fc1';
                         const clientSecret = '97238e1767714ed2adafb1a197947f4e';
 
-                        const input = this.id
+                        const input = event.target.id
+                        console.log(input)
 
-                        getAccessToken(clientId, clientSecret)
-                    })
+                        getAccessToken(clientId, clientSecret, input)
+                    }})
 
                 });
             }
