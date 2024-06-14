@@ -222,6 +222,7 @@ function searchBook(booktitle) {
             const bookEl = document.getElementById('bookResults');
             const subjectEL = document.getElementById('subjectResults');
             bookEl.innerHTML = " ";
+            subjectEL.innerHTML= " ";
 
             for (let i = 0; i < books.length; i++) {
 
