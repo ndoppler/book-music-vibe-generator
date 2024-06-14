@@ -34,13 +34,13 @@ function getPlaylist(access_token, input) {
 
             // Generation of Playlist One Elements for Playlist One Card
             playlistOneCard = $('<div>')
-                .addClass("card column has-background-primary")
+                .addClass("card column has-background-black")
             playlistTwoCard = $('<div>')
-                .addClass("card column")
+                .addClass("card column has-background-black")
             playlistThreeCard = $('<div>')
-                .addClass("card column")
+                .addClass("card column has-background-black")
             playlistFourCard = $('<div>')
-                .addClass("card column")
+                .addClass("card column has-background-black")
 
             playlistOneCardContent = $('<div>')
                 .addClass("card-content has-background-primary-dark ")
@@ -251,7 +251,7 @@ function searchBook(booktitle) {
                         subjectEL.append(subjectCard);
                     }
 
-                    subject.addEventListener('click', function () {
+                    subjectEL.addEventListener('click', function () {
 
                         // Spotify Credentials
                         const clientId = '9fa2e110194042238f5becb0c3425fc1';
