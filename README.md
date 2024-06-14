@@ -31,6 +31,11 @@ THEN I see a link that redirects me to the Spotify Playlist
 
 ## Mock Up
 
+Firstm our Application Wireframe was built that we utilized to generate our HTML layout with Bulma as our CSS Framework:
+<img title="Application Wireframe" alt="Initial Wireframe" src="./assets/images/Perfect Ambient Generator App.png">
+
+Then, we generated a API Pipeline Process Map to demonstrate how our code and APIs would work together to achieve our goal.
+<img title="API Pipeline" alt="Process Map" src="./assets/images/API Logic Pipeline.png">
 
 
 
