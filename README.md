@@ -35,4 +35,9 @@ THEN I see a link that redirects me to the Spotify Playlist
 
 
 ## Deployed Application 
+[Live URL](https://ndoppler.github.io/book-music-vibe-generator/)
 
+
+## Credits 
+
+Thanks to Stephen and Akon for their support! 
