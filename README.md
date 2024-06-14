@@ -30,7 +30,7 @@ THEN I see a link that redirects me to the Spotify Playlist
 ```
 
 ## Mock Up
-
+![Perform of a book search by title, books titles and a book cover is retrieved, the user then click on a book title and on the subjects, a theme matching spotify list appears at the bottom. Another search is done by author, a modal pop up with the author's top works then a theme search is generated, the user click on a theme and a theme matching spotify list is retrieved.](/assets/images/Perfect-Ambient-Generator.gif)
 
 
 
