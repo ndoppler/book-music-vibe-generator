@@ -25,9 +25,25 @@
     padding: 10px;
 }
 
-#bookCover img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+.card h2 {
+    color: black;
+    font-size: small;
+    font-weight: bolder;
 }
+
+.card p {
+    color: black;
+    font-size: small;
+}
+
+.modal-card-title {
+    color: rgb(123, 212, 247);
+    font-weight: lighter;
+    font-family: fantasy;
+    font-size: xx-large;
+}
+   
+
+
+
+
