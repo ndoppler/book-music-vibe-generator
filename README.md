@@ -30,9 +30,14 @@ THEN I see a link that redirects me to the Spotify Playlist
 ```
 
 ## Mock Up
+
+First our Application Wireframe was built that we utilized to generate our HTML layout with Bulma as our CSS Framework:
+<img title="Application Wireframe" alt="Initial Wireframe" src="./assets/images/Perfect Ambient Generator App.png">
+
+Then, we generated a API Pipeline Process Map to demonstrate how our code and APIs would work together to achieve our goal.
+<img title="API Pipeline" alt="Process Map" src="./assets/images/API Logic Pipeline.png">
+
 ![Perform of a book search by title, books titles and a book cover is retrieved, the user then click on a book title and on the subjects, a theme matching spotify list appears at the bottom. Another search is done by author, a modal pop up with the author's top works then a theme search is generated, the user click on a theme and a theme matching spotify list is retrieved.](/assets/images/Perfect-Ambient-Generator.gif)
-
-
 
 ## Deployed Application 
 [Live URL](https://ndoppler.github.io/book-music-vibe-generator/)
