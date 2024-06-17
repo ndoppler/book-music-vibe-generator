@@ -1,6 +1,5 @@
 # Perfect Reading Vibe Generator
 
-
 ## User Story 
 
 ```md 
@@ -29,9 +28,28 @@ WHEN I look at the playlist card
 THEN I see a link that redirects me to the Spotify Playlist 
 ```
 
+## Description
+
+Our app allows users to be recommended complimentary playlists to their searches based on books or authors. We used Open Library APIs to search Book Titles and Authors, as well as get Cover Art.  When a user searchs for authors, they are returned with the author's most popular works. Once the work is selected, either by the Author Results Modal, or through a direct title search, the user is presented with the themes of the selected book. The themes then generate Spotify playists based on the selected theme.
+
+## Technology Used
+
+Our app utizes:
+- HTML
+- CSS
+- Bulma 1.0.0 (CSS Framework)
+-JavaScript
+    - jQuery 3.5.1
+- OpenLibrary APIs
+    -[Book Title Search](https://openlibrary.org/dev/docs/api/search)
+    -[Author Search](https://openlibrary.org/dev/docs/api/authors)
+    -[Book Cover Search](https://openlibrary.org/dev/docs/api/covers)
+- Spotify API
+    [Playlist Search](https://developer.spotify.com/documentation/web-api/reference/get-playlist)
+
 ## Mock Up
 
-First our Application Wireframe was built that we utilized to generate our HTML layout with Bulma as our CSS Framework:
+First, our Application Wireframe was built that we utilized to generate our HTML layout with Bulma as our CSS Framework:
 <img title="Application Wireframe" alt="Initial Wireframe" src="./assets/images/Perfect Ambient Generator App.png">
 
 Then, we generated a API Pipeline Process Map to demonstrate how our code and APIs would work together to achieve our goal.
