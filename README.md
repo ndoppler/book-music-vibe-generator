@@ -34,18 +34,18 @@ Our app allows users to be recommended complimentary playlists to their searches
 
 ## Technology Used
 
-Our app utizes:
+Our app utilizes:
 - HTML
 - CSS
 - Bulma 1.0.0 (CSS Framework)
 -JavaScript
     - jQuery 3.5.1
 - OpenLibrary APIs
-    -[Book Title Search](https://openlibrary.org/dev/docs/api/search)
-    -[Author Search](https://openlibrary.org/dev/docs/api/authors)
-    -[Book Cover Search](https://openlibrary.org/dev/docs/api/covers)
+    - [Book Title Search](https://openlibrary.org/dev/docs/api/search)
+    - [Author Search](https://openlibrary.org/dev/docs/api/authors)
+    - [Book Cover Search](https://openlibrary.org/dev/docs/api/covers)
 - Spotify API
-    [Playlist Search](https://developer.spotify.com/documentation/web-api/reference/get-playlist)
+    - [Playlist Search](https://developer.spotify.com/documentation/web-api/reference/get-playlist)
 
 ## Mock Up
 
