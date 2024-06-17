@@ -4,6 +4,7 @@ topFourResultsEl = $('#topFourResults')
 
 // Spotify Authorization - Client Credentials
 function getAccessToken(clientId, clientSecret, input) {
+   
     return fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
@@ -21,7 +22,7 @@ function getPlaylist(access_token, input) {
         headers: {
             'Authorization': `Bearer ${access_token}`
         }
-    })
+    }) 
         .then(response => response.json())
 
         .then(function (data) {
@@ -141,7 +142,7 @@ function getPlaylist(access_token, input) {
                     "target": "_blank"
                 })
                 .text('View Playlist')
-
+            
             // Creation of Spotify Results Header --Still needs Bulma Formatting
             spotifyResultsEl.append(spotifyResultsHeader)
             // Creation of Spotify Playlist 1 Result Card
@@ -221,8 +222,8 @@ function searchBook(booktitle) {
             const books = data.docs;
             const bookEl = document.getElementById('bookResults');
             const subjectEL = document.getElementById('subjectResults');
-            bookEl.innerHTML = " ";
-            subjectEL.innerHTML= " ";
+            bookEl.innerHTML = "";
+            subjectEL.innerHTML= "";
 
             for (let i = 0; i < books.length; i++) {
 
@@ -400,5 +401,9 @@ document.getElementById('searchThemesButton').onclick = function() {
 
 function clearResults() {
     const authorResultsContainer = document.getElementById('authorSearchResults');
+    const spotifyResultsEl = document.getElementById('spotifyResults');
+    const topFourEl = document.getElementById('topFourResults');
+    spotifyResultsEl.innerHTML = '';
+    topFourEl.innerHTML = '';
     authorResultsContainer.innerHTML = '';
 }
