@@ -25,6 +25,13 @@
     padding: 10px;
 }
 
+#bookCover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 .card h2 {
     color: black;
     font-size: small;
