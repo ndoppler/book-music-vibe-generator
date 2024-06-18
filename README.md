@@ -60,6 +60,7 @@ Then, we generated a API Pipeline Process Map to demonstrate how our code and AP
 ## Deployed Application 
 [Live URL](https://ndoppler.github.io/book-music-vibe-generator/)
 
+[Presentation Slide Deck](https://docs.google.com/presentation/d/10epoF7-0TxRLQessnyoBNvW2Glms7vl82b65K6GnSIk/edit#slide=id.g29f43f0a72_0_24)
 
 ## Credits 
 
